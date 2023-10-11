@@ -21,7 +21,12 @@
     forEachSystem = nixpkgs.lib.genAttrs (import systems);
   in {
     packages = forEachSystem (system: {
-      default = nixpkgs.legacyPackages.${system}.poetry2nix.mkPoetryApplication {projectDir = self;};
+      default =
+        nixpkgs.legacyPackages.${system}.poetry2nix.mkPoetryApplication
+        {
+          projectDir = self;
+          preferWheels = true;
+        };
     });
 
     devShells =
