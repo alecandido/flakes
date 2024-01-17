@@ -27,6 +27,6 @@
     welcomeText = devenvWelcome;
   };
 in {
-  inherit poetry rust maturin;
+  inherit maturin node poetry rust;
   default = devenv.templates.simple;
 }
