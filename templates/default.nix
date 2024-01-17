@@ -6,19 +6,24 @@
     ```
   '';
 
+  maturin = {
+    path = ./maturin;
+    description = "Maturin template.";
+    welcomeText = devenvWelcome;
+  };
+  node = {
+    path = ./node;
+    description = "Node & typescript template.";
+    welcomeText = devenvWelcome;
+  };
   poetry = {
     path = ./poetry;
-    description = "Poetry + devenv template.";
+    description = "Poetry template.";
     welcomeText = devenvWelcome;
   };
   rust = {
     path = ./rust;
-    description = "Rust + devenv template.";
-    welcomeText = devenvWelcome;
-  };
-  maturin = {
-    path = ./maturin;
-    description = "Maturin + devenv template.";
+    description = "Rust template.";
     welcomeText = devenvWelcome;
   };
 in {
