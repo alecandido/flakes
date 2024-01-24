@@ -17,7 +17,17 @@
         pkgs = nixpkgs.legacyPackages.${system};
       in {
         default = pkgs.mkShell {
-          buildInputs = with pkgs; [stdenv gnumake ccls clang gcc pkg-config cmake meson];
+          buildInputs = with pkgs; [
+            stdenv
+            gnumake
+            ccls
+            clang
+            gcc
+            pkg-config
+            cmake
+            meson
+            ninja
+          ];
         };
       });
   };
