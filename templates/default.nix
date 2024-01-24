@@ -6,6 +6,11 @@
     ```
   '';
 
+  c = {
+    path = ./c;
+    description = "C/C++ template.";
+    welcomeText = devenvWelcome;
+  };
   maturin = {
     path = ./maturin;
     description = "Maturin template.";
@@ -27,6 +32,6 @@
     welcomeText = devenvWelcome;
   };
 in {
-  inherit maturin node poetry rust;
+  inherit c maturin node poetry rust;
   default = devenv.templates.simple;
 }
