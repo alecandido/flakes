@@ -1,7 +1,6 @@
 {
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    systems.url = "github:nix-systems/default";
     devenv = {
       url = "github:cachix/devenv";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -12,12 +11,13 @@
   outputs = {
     self,
     nixpkgs,
+    devenv,
     flake-parts,
     ...
   } @ inputs:
     flake-parts.lib.mkFlake {inherit inputs;} {
       imports = [inputs.devenv.flakeModule];
-      systems = nixpkgs.lib.systems.flakeExposed;
+      systems = ["x86_64-linux" "aarch64-darwin"];
 
       perSystem = {pkgs, ...}: {
         packages.default = pkgs.poetry2nix.mkPoetryApplication {
@@ -26,15 +26,18 @@
         };
 
         devenv.shells.default = {
-          packages = with pkgs; [pre-commit poethepoet];
+          packages = with pkgs; [poethepoet pre-commit stdenv.cc.cc.lib];
 
-          languages.python = {
-            enable = true;
-            poetry = {
+          languages = {
+            python = {
               enable = true;
-              install = {
+              poetry = {
                 enable = true;
-                groups = ["dev" "test"];
+                install = {
+                  enable = true;
+                  allExtras = true;
+                  groups = ["dev" "test"];
+                };
               };
             };
           };
