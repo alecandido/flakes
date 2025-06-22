@@ -19,11 +19,7 @@
       imports = [inputs.devenv.flakeModule];
       systems = nixpkgs.lib.systems.flakeExposed;
 
-      perSystem = {
-        pkgs,
-        lib,
-        ...
-      }: {
+      perSystem = {pkgs, ...}: {
         devenv.shells.default = {
           packages = with pkgs; [pre-commit poethepoet];
 
@@ -31,7 +27,7 @@
             enable = true;
             venv = {
               enable = true;
-              requirements = lib.splitString "\n" (builtins.readFile ./requirements.txt);
+              requirements = builtins.readFile ./requirements.txt;
             };
           };
         };
