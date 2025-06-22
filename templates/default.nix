@@ -21,6 +21,11 @@
     description = "Node & typescript template.";
     welcomeText = devenvWelcome;
   };
+  python = {
+    path = ./python;
+    description = "Python template.";
+    welcomeText = devenvWelcome;
+  };
   poetry = {
     path = ./poetry;
     description = "Poetry template.";
@@ -32,6 +37,6 @@
     welcomeText = devenvWelcome;
   };
 in {
-  inherit c maturin node poetry rust;
+  inherit c maturin node python poetry rust;
   default = devenv.templates.simple;
 }
